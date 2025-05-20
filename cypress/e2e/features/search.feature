@@ -9,7 +9,7 @@ Feature: search
             | movieName    |
             | The Matrix   |
             | Nosferatu    |
-            | Inception    |
+            | Inception    | 
             | Parasite     |
             | Interstellar |
 

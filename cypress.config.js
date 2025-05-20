@@ -1,7 +1,11 @@
 const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
-const { addCucumberPreprocessorPlugin } = require("@badeball/cypress-cucumber-preprocessor");
-const { createEsbuildPlugin } = require("@badeball/cypress-cucumber-preprocessor/esbuild");
+const {
+  addCucumberPreprocessorPlugin,
+} = require("@badeball/cypress-cucumber-preprocessor");
+const {
+  createEsbuildPlugin,
+} = require("@badeball/cypress-cucumber-preprocessor/esbuild");
 const { lighthouse, prepareAudit } = require("cypress-audit");
 
 module.exports = defineConfig({
@@ -28,34 +32,33 @@ module.exports = defineConfig({
         prepareAudit(launchOptions);
       });
 
-      const fs = require("fs")
-      const path = require("path")
-      
+      const fs = require("fs");
+      const path = require("path");
+
       on("task", {
         lighthouse: lighthouse({
           disableDeviceEmulation: true,
           formFactor: "desktop",
           screenEmulation: { disabled: true },
-          output: "html"
+          output: "html",
         }),
-      
-        log(message) {
-          console.log(message)
-          return null
-        },
-      
-        saveReport({ report, fileName }) {
-          const reportsDir = "cypress/reports/lighthouse"
-          if (!fs.existsSync(reportsDir)) {
-            fs.mkdirSync(reportsDir, { recursive: true })
-          }
-          const filePath = path.join(reportsDir, `${fileName}.html`)
-          fs.writeFileSync(filePath, report)
-          return filePath
-        }
-      })
-      
 
-    }
-  }
-})
+        log(message) {
+          console.log(message);
+          return null;
+        },
+
+        saveReport({ report, fileName }) {
+          const reportsDir = "cypress/reports/lighthouse";
+          if (!fs.existsSync(reportsDir)) {
+            fs.mkdirSync(reportsDir, { recursive: true });
+          }
+          const filePath = path.join(reportsDir, `${fileName}.html`);
+          fs.writeFileSync(filePath, report);
+          return filePath;
+        },
+      });
+      return config;
+    },
+  },
+});
